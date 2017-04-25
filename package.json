@@ -9,6 +9,10 @@
       "mongodb": "^2.2.19"
   },
   "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xliii/goose"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
