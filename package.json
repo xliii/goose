@@ -4,9 +4,11 @@
   "description": "Geese Archive",
   "main": "index.js",
   "dependencies": {
-      "express": "^4.14.0",
-      "ejs": "^1.0.0",
-      "mongodb": "^2.2.19"
+    "body-parser": "^1.17.1",
+    "ejs": "^1.0.0",
+    "express": "^4.14.0",
+    "express-mongo-db": "^2.0.3",
+    "mongodb": "^2.2.19"
   },
   "devDependencies": {},
   "repository": {

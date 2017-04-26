@@ -1,0 +1,31 @@
+
+
+goose {
+    author: 'XLIII',
+    games: [
+        { players: ['Vitbuk', 'XPYCT', 'Panda'], winner: 'Vitbuk' }
+    ],
+    players: {
+        min: 3,
+        max: 5,
+        optimal: 4
+    },
+    rounds: [
+        {
+            title: 'Birthday',
+            subtitle: 'These bands have birthday songs',
+            options: [
+                {
+                    name: 'Marilyn Manson',
+                    comment: 'But the other Marilyn did',
+                    correct: false
+                },
+                {
+                    name: 'Rihanna',
+                    comment: 'Birthday Cake',
+                    correct: true
+                }
+            ]
+        }
+    ]
+}
