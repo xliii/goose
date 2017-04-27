@@ -1,0 +1,42 @@
+<html>
+<% include templates/head.ejs %>
+<body>
+<script>
+    $('document').ready(function() {
+        $('#addBtn').click(function() {
+            var data = $('#gooseData').data('goose');
+            $.post('/addGoose', {
+                goose: JSON.stringify(data)
+            }, function(data) {
+                if (data.message) {
+                    alert(data.message);
+                }
+            });
+        });
+    });
+</script>
+    <h1><b><%= goose.title%></b> by <%= goose.author %></h1>
+    <% goose.rounds.forEach(function(round){ %>
+        <h2><%= round.title %></h2>
+        <h3><%= round.subtitle %></h3>
+        <ul>
+        <% round.options.forEach(function(option){ %>
+            <li><%= option.name %></li>
+        <% }) %>
+        </ul>
+    <% }) %>
+    <% if (goose.games.length) { %>
+        <hr/>
+        <h4>Played by:</h4>
+        <ul>
+        <% goose.games.forEach(function(game) { %>
+            <% game.players.forEach(function(player) { %>
+                <li><%= player %></li>
+            <% }) %>
+        <% }) %>
+        </ul>
+    <% } %>
+    <input id="gooseData" type="hidden" data-goose="<%= JSON.stringify(goose) %>">
+    <button id="addBtn" type="button" class="btn btn-primary">Add</button>
+</body>
+</html>
