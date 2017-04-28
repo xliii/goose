@@ -4,7 +4,9 @@
 var DB = require('../db');
 
 exports.findAll = function(callback) {
-    DB.find('goose', function(results) {
-        callback(results);
-    })
+    DB.find('goose', callback);
+};
+
+exports.add = function(goose, callback) {
+    DB.add('goose', goose, callback);
 };

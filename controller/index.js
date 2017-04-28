@@ -12,14 +12,9 @@ router.get('/', function(req, res) {
     res.render('index');
 });
 
-router.get('/add', function(req, res) {
-    res.render('add');
-});
-
 router.post('/addGoose', function(req, res) {
     var goose = JSON.parse(req.body.goose);
-    req.db.collection('goose').insertOne(goose, function (err, result) {
-        assert.equal(err, null);
+    Goose.add(goose, function() {
         console.log('Goose added!');
         res.send({message : 'Goose successfully added!'});
     });
