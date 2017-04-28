@@ -2,7 +2,9 @@
  * Created by User on 2017-04-28.
  */
 var router = require('express').Router();
-var shuffle = require('./../script/shuffle.js');
+var shuffle = require('../script/shuffle');
+var assert = require('assert');
+var Goose = require('../model/goose');
 
 var players = ['XLIII', 'VitBuk', 'Panda', 'HRUST', 'Cheeko', 'Dashutka'];
 
@@ -16,16 +18,18 @@ router.get('/add', function(req, res) {
 
 router.post('/addGoose', function(req, res) {
     var goose = JSON.parse(req.body.goose);
-    console.log(goose);
-    res.send({message : 'Goose successfully added!'});
+    req.db.collection('goose').insertOne(goose, function (err, result) {
+        assert.equal(err, null);
+        console.log('Goose added!');
+        res.send({message : 'Goose successfully added!'});
+    });
 });
 
 router.get('/list', function(req, res) {
-    var cursor = req.db.collection('goose').find();
-    cursor.toArray(function(err, results) {
+    Goose.findAll(function(results) {
         var geese = results.map(function(goose) {
             return {
-                name: goose.name,
+                title: goose.title,
                 author: goose.author
             }
         });
@@ -75,5 +79,8 @@ router.get('/generate', function(req, res) {
     });
 });
 
+router.get('/grid', function(req, res) {
+
+});
 
 module.exports = router;
