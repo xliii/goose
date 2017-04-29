@@ -15,7 +15,9 @@
         <tr>
             <td><b><%= game.title %></b> by <%= game.author %></td>
             <% players.forEach(function(player) { %>
-                <% if (game.players.indexOf(player) < 0) {%>
+                <% if (game.author == player) { %>
+                    <td class="crossed"></td>
+                <% } else if (game.players.indexOf(player) < 0) {%>
                     <td></td>
                 <% } else {%>
                     <td class="success"></td>

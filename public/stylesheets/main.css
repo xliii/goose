@@ -1,3 +1,7 @@
 .hello {
     font-size: 20px;
 }
+
+table td.crossed {
+    background-image: linear-gradient(to bottom left,  transparent calc(50% - 1px), black, transparent calc(50% + 1px));
+}
