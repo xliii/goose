@@ -5,7 +5,7 @@
     $('document').ready(function() {
         $('#addBtn').click(function() {
             var data = $('#gooseData').data('goose');
-            $.post('/addGoose', {
+            $.post('/goose/add', {
                 goose: JSON.stringify(data)
             }, function(data) {
                 if (data.message) {
@@ -37,6 +37,6 @@
         </ul>
     <% } %>
     <input id="gooseData" type="hidden" data-goose="<%= JSON.stringify(goose) %>">
-    <button id="addBtn" type="button" class="btn btn-primary">Add</button>
+    <button id="addBtn" type="button" class="btn btn-danger">Add to DB</button>
 </body>
 </html>

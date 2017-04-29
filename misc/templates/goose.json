@@ -1,0 +1,11 @@
+{
+  "title" : "Goose",
+  "author" : "Author",
+  "games" : [],
+  "players": {
+    "min" : 3,
+    "max" : 5,
+    "optimal" : 4
+  },
+  "rounds" : []
+}

@@ -1,0 +1,29 @@
+<html>
+<% include templates/head.ejs %>
+
+<body>
+<h1>Grid of games</h1>
+<div class="container">
+    <table class="table table-bordered grid">
+        <tr>
+            <th></th>
+            <% players.forEach(function(player) { %>
+            <th><%= player %></th>
+            <% })%>
+        </tr>
+        <% games.forEach(function(game) { %>
+        <tr>
+            <td><b><%= game.title %></b> by <%= game.author %></td>
+            <% players.forEach(function(player) { %>
+                <% if (game.players.indexOf(player) < 0) {%>
+                    <td></td>
+                <% } else {%>
+                    <td class="success"></td>
+                <% } %>
+            <% }) %>
+        </tr>
+        <% })%>
+    </table>
+</div>
+</body>
+</html>

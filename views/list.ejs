@@ -2,8 +2,11 @@
 <% include templates/head.ejs %>
 
 <body>
-<% for (var i = 0; i < list.length; i++) { %>
-    <div><%= list[i].title %> by <%= list[i].author %></div>
-<% } %>
+<h1>List of games</h1>
+    <ul>
+    <% for (var i = 0; i < list.length; i++) { %>
+    <li><%= list[i].title %> by <%= list[i].author %></li>
+    <% } %>
+    </ul>
 </body>
 </html>
