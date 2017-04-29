@@ -3,10 +3,9 @@
  */
 var assert = require("assert");
 
-var url = 'mongodb://localhost:27017/goose';
 var db = null;
 
-require('mongodb').MongoClient.connect(url, function(err, connection) {
+require('mongodb').MongoClient.connect(process.env.MONGODB_URI, function(err, connection) {
     assert.equal(err, null);
     console.log('DB connection established');
     db = connection;
