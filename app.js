@@ -11,6 +11,8 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 
+var port = process.env.PORT || 3000;
+
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -18,6 +20,6 @@ app.use(bodyParser.urlencoded({extended : false}));
 
 app.use(require('./controller'));
 
-app.listen(process.env.PORT || 3000, function() {
-    console.log('Listening to 3000');
+app.listen(port, function() {
+    console.log('Listening to ' + port);
 });
