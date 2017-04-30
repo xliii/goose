@@ -46,6 +46,10 @@ router.get('/grid', function(req, res) {
     });
 });
 
+router.get('/new', function(req, res) {
+    res.render('new');
+});
+
 router.post('/add', function(req, res) {
     var goose = JSON.parse(req.body.goose);
     Goose.add(goose, function() {

@@ -5,3 +5,72 @@
 table td.crossed {
     background-image: linear-gradient(to bottom left,  transparent calc(50% - 1px), black, transparent calc(50% + 1px));
 }
+
+.nav-tabs > li {
+    position: relative;
+}
+
+.nav-tabs > li > a {
+    display: inline-block;
+}
+
+.nav-tabs > li > span {
+    display:none;
+    cursor:pointer;
+    position:absolute;
+    right: 6px;
+    top: 16px;
+    font-size: 10px;
+    color: #770000;
+}
+
+.nav-tabs > li:hover > span {
+    display: inline-block;
+}
+
+.tab-content {
+    margin-top: 10px;
+}
+
+.add-option {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #0033FF;
+}
+
+.add-option:hover {
+    /*font-size: 30px;*/
+    /* TODO: Add animation */
+}
+
+.option {
+    margin-bottom: 5px;
+}
+
+.option .remove-option {
+    font-size: 22px;
+    top: 5px;
+    color: #770000;
+    display: none;
+}
+
+.option:hover .remove-option {
+    display: inline-block;
+}
+
+.option-template {
+    display: none;
+}
+
+.option-marker {
+    font-size: 22px;
+    top: 5px;
+}
+
+.option-correct {
+    color: green;
+}
+
+.option-incorrect {
+    color: red;
+}

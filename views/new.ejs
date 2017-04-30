@@ -1,0 +1,111 @@
+<html>
+<% include templates/head.ejs %>
+
+<script>
+    $(document).ready(function() {
+        function addOption(round) {
+            var option = $('.option-template').clone();
+            option.insertBefore('#round_' + round + '_addoption');
+            option.removeClass('option-template');
+        }
+
+        $(".nav-tabs").on("click", "a", function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('add-round')) {
+                $(this).tab('show');
+            }
+        }).on("click", "span", function () {
+                var anchor = $(this).siblings('a');
+                $(anchor.attr('href')).remove();
+                $(this).parent().remove();
+                $(".nav-tabs li").children('a').first().click();
+            });
+
+        $('.add-round').click(function (e) {
+            e.preventDefault();
+            var id = $(".nav-tabs").children().length; //think about it ;)
+            var tabId = 'round_' + id;
+            $(this).closest('li').before('<li><a href="#round_' + id + '">Round ' + id + '</a> <span class="glyphicon glyphicon-remove"></span></li>');
+            $('.tab-content').append('<div class="tab-pane" id="' + tabId + '">Round ' + id + ' content</div>');
+            $('.nav-tabs li:nth-child(' + id + ') a').click();
+        });
+
+        $('.add-option-glyph').click(function (e) {
+            e.preventDefault();
+            var round = $(this).data('round');
+            addOption(round);
+        });
+
+        $('.tab-content').on('click', '.option-marker', function (e) {
+            e.preventDefault();
+            $(this).toggleClass('option-correct option-incorrect');
+        }).on('click', '.remove-option', function (e) {
+            e.preventDefault();
+            $(this).parent().parent().parent().remove();
+        });
+
+        addOption(1);
+    });
+</script>
+
+<body>
+<h1>Add new goose</h1>
+<div class="container">
+    <div class="form-group">
+        <input id="title" type="text" class="form-control" placeholder="Title">
+    </div>
+
+    <div class="form-group">
+        <input id="subtitle" type="text" class="form-control" placeholder="Subtitle">
+    </div>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#round_1" data-toggle="tab">Round 1</a><span class="glyphicon glyphicon-remove"></span>
+        </li>
+        <li>
+            <a href="#" class="add-round">+ Add Round</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="round_1">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Round title">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Round subtitle">
+            </div>
+
+            <h3>Options</h3>
+
+            <div id="round_1_options">
+                <div class="row option option-template">
+                    <div class="col-md-6">
+                        <div class="col-md-11">
+                            <input type="text" class="form-control" placeholder="Option">
+                        </div>
+                        <div class="col-md-1">
+                            <span class="glyphicon glyphicon-asterisk option-marker option-correct"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-11">
+                            <input type="text" class="form-control" placeholder="Comment">
+                        </div>
+                        <div class="col-md-1">
+                            <span class="glyphicon glyphicon-remove remove-option"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row add-option" id="round_1_addoption">
+                    <div class="col-md-12">
+                        <span data-round="1" class="glyphicon glyphicon-plus add-option-glyph"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
