@@ -3,7 +3,6 @@
 
 <script>
     $(document).ready(function() {
-
         function addRound() {
             var id = $(".nav-tabs").children().length;
             var tabId = 'round_' + id;
@@ -56,7 +55,31 @@
         });
 
         $('#submit-btn').click(function (e) {
-            console.log('Submit!');
+            var goose = {};
+            goose.title = $('#title').val();
+            goose.subtitle = $('#subtitle').val();
+            goose.author = $('#author').val();
+            goose.rounds = [];
+            $('.nav-tabs > li > a').each(function() {
+                var $li = $(this);
+                if ($li.hasClass('add-round')) return;
+                var $round = $($li.attr('href'));
+                var round = {};
+
+                round.title = $round.find('.round-title').val();
+                round.subtitle = $round.find('.round-subtitle').val();
+                round.options = [];
+                $round.find('.option').each(function() {
+                    var option = {};
+                    option.name = $(this).find('.option-title').val();
+                    option.comment = $(this).find('.option-comment').val();
+                    var marker = $(this).find('.option-marker');
+                    option.correct = marker.hasClass('option-correct');
+                    round.options.push(option);
+                });
+                goose.rounds.push(round);
+            });
+            console.log(goose);
         });
 
         addRound();
@@ -72,6 +95,10 @@
 
     <div class="form-group">
         <input id="subtitle" type="text" class="form-control" placeholder="Subtitle">
+    </div>
+
+    <div class="form-group">
+        <input id="author" type="text" class="form-control" placeholder="Author">
     </div>
 
     <ul class="nav nav-tabs" role="tablist">
@@ -94,7 +121,7 @@
     <div class="row option option-template">
         <div class="col-md-6">
             <div class="col-md-11">
-                <input type="text" class="form-control" placeholder="Option">
+                <input type="text" class="form-control option-title" placeholder="Option">
             </div>
             <div class="col-md-1">
                 <span class="glyphicon glyphicon-asterisk option-marker option-correct"></span>
@@ -102,7 +129,7 @@
         </div>
         <div class="col-md-6">
             <div class="col-md-11">
-                <input type="text" class="form-control" placeholder="Comment">
+                <input type="text" class="form-control option-comment" placeholder="Comment">
             </div>
             <div class="col-md-1">
                 <span class="glyphicon glyphicon-remove remove-option"></span>
@@ -112,11 +139,11 @@
 
     <div class="tab-pane round-template">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Round title">
+            <input type="text" class="form-control round-title" placeholder="Round title">
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Round subtitle">
+            <input type="text" class="form-control round-subtitle" placeholder="Round subtitle">
         </div>
 
         <h3>Options</h3>
