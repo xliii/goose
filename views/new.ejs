@@ -3,6 +3,19 @@
 
 <script>
     $(document).ready(function() {
+
+        function addRound() {
+            var id = $(".nav-tabs").children().length;
+            var tabId = 'round_' + id;
+            $('.add-round').parent().before('<li><a href="#round_' + id + '">Round ' + id + '</a> <span class="glyphicon glyphicon-remove"></span></li>');
+            var round = $('.round-template').clone();
+            round.attr('id', tabId);
+            round.removeClass('round-template');
+            round.appendTo('.tab-content');
+            addOption($('#' + tabId).find('.add-option'));
+            $('.nav-tabs li:nth-child(' + id + ') a').click();
+        }
+
         function addOption(where) {
             var option = $('.option-template').clone();
             option.removeClass('option-template');
@@ -23,16 +36,7 @@
 
         $('.add-round').click(function (e) {
             e.preventDefault();
-            var id = $(".nav-tabs").children().length; //think about it ;)
-            var tabId = 'round_' + id;
-            $(this).closest('li').before('<li><a href="#round_' + id + '">Round ' + id + '</a> <span class="glyphicon glyphicon-remove"></span></li>');
-            $('.tab-content').append('<div class="tab-pane" id="' + tabId + '">Round ' + id + ' content</div>');
-            $('.nav-tabs li:nth-child(' + id + ') a').click();
-        });
-
-        $('.add-option-glyph').click(function (e) {
-            e.preventDefault();
-            addOption($(this).closest('.add-option'));
+            addRound();
         });
 
         $('.tab-content').on('click', '.option-marker', function (e) {
@@ -41,15 +45,18 @@
         }).on('click', '.remove-option', function (e) {
             e.preventDefault();
             $(this).parent().parent().parent().remove();
+        }).on('click', '.add-option-glyph', function (e) {
+            e.preventDefault();
+            addOption($(this).closest('.add-option'));
         });
 
-        addOption('.add-option');
+        addRound();
     });
 </script>
 
 <body>
-<h1>Add new goose</h1>
 <div class="container">
+    <h1>Add new goose</h1>
     <div class="form-group">
         <input id="title" type="text" class="form-control" placeholder="Title">
     </div>
@@ -59,15 +66,34 @@
     </div>
 
     <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#round_1" data-toggle="tab">Round 1</a><span class="glyphicon glyphicon-remove"></span>
-        </li>
         <li>
             <a href="#" class="add-round">+ Add Round</a>
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane active" id="round_1">
+    </div>
+
+    <div class="templates">
+        <div class="row option option-template">
+            <div class="col-md-6">
+                <div class="col-md-11">
+                    <input type="text" class="form-control" placeholder="Option">
+                </div>
+                <div class="col-md-1">
+                    <span class="glyphicon glyphicon-asterisk option-marker option-correct"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-11">
+                    <input type="text" class="form-control" placeholder="Comment">
+                </div>
+                <div class="col-md-1">
+                    <span class="glyphicon glyphicon-remove remove-option"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane round-template">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Round title">
             </div>
@@ -79,24 +105,6 @@
             <h3>Options</h3>
 
             <div>
-                <div class="row option option-template">
-                    <div class="col-md-6">
-                        <div class="col-md-11">
-                            <input type="text" class="form-control" placeholder="Option">
-                        </div>
-                        <div class="col-md-1">
-                            <span class="glyphicon glyphicon-asterisk option-marker option-correct"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="col-md-11">
-                            <input type="text" class="form-control" placeholder="Comment">
-                        </div>
-                        <div class="col-md-1">
-                            <span class="glyphicon glyphicon-remove remove-option"></span>
-                        </div>
-                    </div>
-                </div>
                 <div class="row add-option">
                     <div class="col-md-12">
                         <span class="glyphicon glyphicon-plus add-option-glyph"></span>

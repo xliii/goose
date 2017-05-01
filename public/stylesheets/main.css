@@ -58,6 +58,10 @@ table td.crossed {
     display: inline-block;
 }
 
+.round-template {
+    display: none;
+}
+
 .option-template {
     display: none;
 }
