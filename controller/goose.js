@@ -27,7 +27,7 @@ router.get('/grid', function(req, res) {
             return {
                 title: goose.title,
                 author : goose.author,
-                players : goose.games.reduce(function(acc, game) {
+                players : !goose.games ? [] : goose.games.reduce(function(acc, game) {
                     game.players.forEach(function(player) {
                         if (acc.indexOf(player) < 0) {
                             acc.push(player);

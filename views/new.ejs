@@ -79,7 +79,13 @@
                 });
                 goose.rounds.push(round);
             });
-            console.log(goose);
+            $.post('/goose/add', {
+                goose: JSON.stringify(goose)
+            }, function(data) {
+                if (data.message) {
+                    alert(data.message);
+                }
+            });
         });
 
         addRound();
