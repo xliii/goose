@@ -34,6 +34,7 @@ table td.crossed {
 
 .add-option {
     margin-top: 10px;
+    margin-bottom: 20px;
     font-size: 20px;
     color: #0033FF;
 }
@@ -63,6 +64,10 @@ table td.crossed {
 }
 
 .option-template {
+    display: none;
+}
+
+.tab-template {
     display: none;
 }
 

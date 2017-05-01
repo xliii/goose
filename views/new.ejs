@@ -7,7 +7,12 @@
         function addRound() {
             var id = $(".nav-tabs").children().length;
             var tabId = 'round_' + id;
-            $('.add-round').parent().before('<li><a href="#round_' + id + '">Round ' + id + '</a> <span class="glyphicon glyphicon-remove"></span></li>');
+            var tab = $('.tab-template').clone();
+            tab.removeClass('tab-template');
+            var a = tab.find('a');
+            a.attr('href', '#' + tabId);
+            a.text('Round ' + id);
+            tab.insertBefore($('.add-round').parent());
             var round = $('.round-template').clone();
             round.attr('id', tabId);
             round.removeClass('round-template');
@@ -50,6 +55,10 @@
             addOption($(this).closest('.add-option'));
         });
 
+        $('#submit-btn').click(function (e) {
+            console.log('Submit!');
+        });
+
         addRound();
     });
 </script>
@@ -73,46 +82,54 @@
     <div class="tab-content">
     </div>
 
-    <div class="templates">
-        <div class="row option option-template">
-            <div class="col-md-6">
-                <div class="col-md-11">
-                    <input type="text" class="form-control" placeholder="Option">
-                </div>
-                <div class="col-md-1">
-                    <span class="glyphicon glyphicon-asterisk option-marker option-correct"></span>
-                </div>
+    <button id="submit-btn" class="btn btn-primary">Submit</button>
+</div>
+
+<div class="templates">
+
+    <li class="tab-template">
+        <a data-toggle="tab">Round</a><span class="glyphicon glyphicon-remove"></span>
+    </li>
+
+    <div class="row option option-template">
+        <div class="col-md-6">
+            <div class="col-md-11">
+                <input type="text" class="form-control" placeholder="Option">
             </div>
-            <div class="col-md-6">
-                <div class="col-md-11">
-                    <input type="text" class="form-control" placeholder="Comment">
-                </div>
-                <div class="col-md-1">
-                    <span class="glyphicon glyphicon-remove remove-option"></span>
-                </div>
+            <div class="col-md-1">
+                <span class="glyphicon glyphicon-asterisk option-marker option-correct"></span>
             </div>
         </div>
-
-        <div class="tab-pane round-template">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Round title">
+        <div class="col-md-6">
+            <div class="col-md-11">
+                <input type="text" class="form-control" placeholder="Comment">
             </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Round subtitle">
+            <div class="col-md-1">
+                <span class="glyphicon glyphicon-remove remove-option"></span>
             </div>
+        </div>
+    </div>
 
-            <h3>Options</h3>
+    <div class="tab-pane round-template">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Round title">
+        </div>
 
-            <div>
-                <div class="row add-option">
-                    <div class="col-md-12">
-                        <span class="glyphicon glyphicon-plus add-option-glyph"></span>
-                    </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Round subtitle">
+        </div>
+
+        <h3>Options</h3>
+
+        <div>
+            <div class="row add-option">
+                <div class="col-md-12">
+                    <span class="glyphicon glyphicon-plus add-option-glyph"></span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>
