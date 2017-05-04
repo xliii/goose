@@ -13,7 +13,8 @@ router.get('/list', function(req, res) {
         var geese = results.map(function(goose) {
             return {
                 title: goose.title,
-                author: goose.author
+                author: goose.author,
+                id : goose._id
             }
         });
         res.render('list', {'list' : geese});
@@ -55,6 +56,14 @@ router.post('/add', function(req, res) {
     Goose.add(goose, function() {
         console.log('Goose added!');
         res.send({message : 'Goose successfully added!'});
+    });
+});
+
+router.get('/read/:id', function(req, res) {
+    Goose.findOne(req.params.id, function(goose) {
+        res.render('goose', {
+            goose : goose
+        });
     });
 });
 

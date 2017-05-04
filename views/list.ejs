@@ -5,7 +5,9 @@
 <h1>List of games</h1>
     <ul>
     <% for (var i = 0; i < list.length; i++) { %>
-    <li><%= list[i].title %> by <%= list[i].author %></li>
+    <li>
+        <a href="/goose/read/<%= list[i].id %>"><%= list[i].title %> by <%= list[i].author %></a>
+    </li>
     <% } %>
     </ul>
 </body>

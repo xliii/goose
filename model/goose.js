@@ -10,3 +10,7 @@ exports.findAll = function(callback) {
 exports.add = function(goose, callback) {
     DB.add('goose', goose, callback);
 };
+
+exports.findOne = function(id, callback) {
+    DB.findOne('goose', id, callback);
+};
