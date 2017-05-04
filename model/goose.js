@@ -14,3 +14,15 @@ exports.add = function(goose, callback) {
 exports.findOne = function(id, callback) {
     DB.findOne('goose', id, callback);
 };
+
+exports.remove = function(id, callback) {
+    DB.deleteOne('goose', id, callback);
+};
+
+exports.addPlayer = function(id, player, callback) {
+
+};
+
+exports.removePlayer = function(id, player, callback) {
+
+};

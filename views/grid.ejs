@@ -1,6 +1,16 @@
 <html>
 <% include templates/head.ejs %>
 
+<script>
+    $(document).ready(function() {
+        $('.cell').click(function() {
+            var played = $(this).hasClass('success');
+            $(this).data('player');
+            console.log($(this).data('goose'));
+        });
+    });
+</script>
+
 <body>
 <h1>Grid of games</h1>
 <div class="container">
@@ -18,9 +28,9 @@
                 <% if (game.author == player) { %>
                     <td class="crossed"></td>
                 <% } else if (game.players.indexOf(player) < 0) {%>
-                    <td></td>
+                    <td class="cell" data-player="<%= player %>" data-goose="<%= game.id %>"></td>
                 <% } else {%>
-                    <td class="success"></td>
+                    <td class="cell success" data-player="<%= player %>" data-goose="<%= game.id %>"></td>
                 <% } %>
             <% }) %>
         </tr>

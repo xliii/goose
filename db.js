@@ -26,6 +26,25 @@ exports.findOne = function(collection, id, callback) {
     });
 };
 
+exports.update = function(collection, id, update, callback) {
+    db.collection(collection).updateOne({_id : new ObjectId(id)},
+        update, function(err, results) {
+            assert.equal(err, null);
+            console.log(results);
+            callback();
+        }
+    );
+};
+
+exports.deleteOne = function(collection, id, callback) {
+    db.collection(collection).deleteOne({_id : new ObjectId(id)},
+        function (err, results) {
+            assert.equal(err, null);
+            callback();
+        }
+    );
+};
+
 exports.count = function(collection, callback) {
     db.collection(collection).count(function(err, count) {
         assert.equal(err, null);

@@ -1,6 +1,32 @@
 <html>
 <% include templates/head.ejs %>
 <body>
+<script>
+    $('document').ready(function() {
+        $('#addBtn').click(function() {
+            var data = $('#gooseData').data('goose');
+            $.post('/goose/add', {
+                goose: JSON.stringify(data)
+            }, function(data) {
+                if (data.message) {
+                    alert(data.message);
+                }
+            });
+        });
+        $('#removeBtn').click(function() {
+            var id = $('#gooseData').data('goose')._id;
+            $.ajax({
+                url: '/goose/' + id,
+                type: 'DELETE',
+                success: function(data) {
+                    if (data.message) {
+                        alert(data.message);
+                    }
+                }
+            });
+        });
+    });
+</script>
     <h1><b><%= goose.title%></b> by <%= goose.author %></h1>
     <% goose.rounds.forEach(function(round){ %>
         <h2><%= round.title %></h2>
@@ -11,16 +37,20 @@
         <% }) %>
         </ul>
     <% }) %>
-    <% if (goose.games && goose.games.length) { %>
+    <% if (goose.players && goose.players.length) { %>
         <hr/>
         <h4>Played by:</h4>
         <ul>
-        <% goose.games.forEach(function(game) { %>
-            <% game.players.forEach(function(player) { %>
-                <li><%= player %></li>
-            <% }) %>
+        <% goose.players.forEach(function(player) { %>
+            <li><%= player %></li>
         <% }) %>
         </ul>
     <% } %>
+    <input id="gooseData" type="hidden" data-goose="<%= JSON.stringify(goose) %>">
+    <% if (saved) { %>
+        <button id="removeBtn" type="button" class="btn btn-danger">Remove from DB</button>
+    <% } else { %>
+        <button id="addBtn" type="button" class="btn btn-success">Add to DB</button>
+    <% }%>
 </body>
 </html>

@@ -11,14 +11,18 @@ router.use('/goose', require('./goose'));
 
 router.get('/generate', function(req, res) {
     var goose = require('../misc/generator')();
-    //console.log(JSON.stringify(goose));
     res.render('goose', {
+        saved : false,
         goose : goose
     });
 });
 
 router.get('/grid', function(req, res) {
     res.redirect('/goose/grid');
+});
+
+router.get('/404', function(req, res) {
+    res.render('404');
 });
 
 module.exports = router;

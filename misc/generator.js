@@ -31,14 +31,7 @@ module.exports = function() {
     return {
         title: 'Goose',
         author: players[0],
-        games: [
-            { players: [players[1], players[2], players[3]]}
-        ],
-        players: {
-            min: 3,
-            max: 5,
-            optimal: 4
-        },
+        players: [players[1], players[2], players[3]],
         rounds: rounds
     };
 };

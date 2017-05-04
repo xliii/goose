@@ -26,21 +26,21 @@ router.get('/grid', function(req, res) {
         var allPlayers = [];
         var geese = results.map(function(goose) {
             return {
+                id : goose._id,
                 title: goose.title,
                 author : goose.author,
-                players : !goose.games ? [] : goose.games.reduce(function(acc, game) {
-                    game.players.forEach(function(player) {
-                        if (acc.indexOf(player) < 0) {
-                            acc.push(player);
-                        }
-                        if (allPlayers.indexOf(player) < 0) {
-                            allPlayers.push(player);
-                        }
-                    });
-                    acc.sort();
-                    return acc;
-                }, [])
+                players : goose.players
             }
+        });
+        geese.forEach(function(goose) {
+            goose.players.forEach(function(player) {
+                allPlayers.push(player);
+            });
+            allPlayers.push(goose.author);
+        });
+        //Leave only distinct players
+        allPlayers = allPlayers.filter(function(value, index, self) {
+            return self.indexOf(value) === index;
         });
         allPlayers.sort();
         res.render('grid', {games : geese, players : allPlayers});
@@ -59,12 +59,34 @@ router.post('/add', function(req, res) {
     });
 });
 
+router.delete('/:id', function(req, res) {
+    Goose.remove(req.params.id, function() {
+        console.log('Goose removed!');
+        res.send({message : 'Goose successfully removed!'});
+    })
+});
+
 router.get('/read/:id', function(req, res) {
     Goose.findOne(req.params.id, function(goose) {
-        res.render('goose', {
-            goose : goose
-        });
+        if (goose) {
+            res.render('goose', {
+                saved : true,
+                goose : goose
+            });
+        } else {
+            res.redirect('/404');
+        }
     });
+});
+
+router.post('/:id/players/add/:player', function(req, res) {
+    Goose.findOne(req.params.id, function(goose) {
+
+    });
+});
+
+router.post('/:id/players/remove/:player', function(req, res) {
+
 });
 
 module.exports = router;
