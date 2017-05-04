@@ -80,13 +80,15 @@ router.get('/read/:id', function(req, res) {
 });
 
 router.post('/:id/players/add/:player', function(req, res) {
-    Goose.findOne(req.params.id, function(goose) {
-
+    Goose.addPlayer(req.params.id, req.params.player, function() {
+        res.send({played : true});
     });
 });
 
 router.post('/:id/players/remove/:player', function(req, res) {
-
+    Goose.removePlayer(req.params.id, req.params.player, function() {
+        res.send({played : false});
+    });
 });
 
 module.exports = router;

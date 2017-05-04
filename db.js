@@ -30,7 +30,6 @@ exports.update = function(collection, id, update, callback) {
     db.collection(collection).updateOne({_id : new ObjectId(id)},
         update, function(err, results) {
             assert.equal(err, null);
-            console.log(results);
             callback();
         }
     );

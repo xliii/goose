@@ -4,9 +4,17 @@
 <script>
     $(document).ready(function() {
         $('.cell').click(function() {
-            var played = $(this).hasClass('success');
-            $(this).data('player');
-            console.log($(this).data('goose'));
+            var cell = $(this);
+            var action = cell.hasClass('success') ? 'remove' : 'add';
+            var id = cell.data('goose');
+            var player = cell.data('player');
+            $.post('/goose/' + id + '/players/' + action + '/' + player, function(data) {
+                if (data.played) {
+                    cell.addClass('success');
+                } else {
+                    cell.removeClass('success');
+                }
+            });
         });
     });
 </script>

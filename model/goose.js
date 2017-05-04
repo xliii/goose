@@ -20,9 +20,9 @@ exports.remove = function(id, callback) {
 };
 
 exports.addPlayer = function(id, player, callback) {
-
+    DB.update('goose', id, { $push : { players : player}}, callback);
 };
 
 exports.removePlayer = function(id, player, callback) {
-
+    DB.update('goose', id, { $pull : { players : player}}, callback);
 };
