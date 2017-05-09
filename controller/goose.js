@@ -17,7 +17,7 @@ router.get('/list', function(req, res) {
                 id : goose._id
             }
         });
-        res.render('list', {'list' : geese});
+        res.render('list', {'games' : geese});
     });
 });
 
@@ -33,9 +33,11 @@ router.get('/grid', function(req, res) {
             }
         });
         geese.forEach(function(goose) {
-            goose.players.forEach(function(player) {
-                allPlayers.push(player);
-            });
+            if (goose.players) {
+                goose.players.forEach(function(player) {
+                    allPlayers.push(player);
+                });
+            }
             allPlayers.push(goose.author);
         });
         //Leave only distinct players

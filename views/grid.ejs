@@ -20,8 +20,9 @@
 </script>
 
 <body>
-<h1>Grid of games</h1>
 <div class="container">
+    <h1><b>Grid of games</b></h1>
+    <% if (games.length && players.length) { %>
     <table class="table table-bordered grid">
         <tr>
             <th></th>
@@ -29,21 +30,24 @@
             <th><%= player %></th>
             <% })%>
         </tr>
-        <% games.forEach(function(game) { %>
-        <tr>
-            <td><b><%= game.title %></b> by <%= game.author %></td>
-            <% players.forEach(function(player) { %>
-                <% if (game.author == player) { %>
-                    <td class="crossed"></td>
-                <% } else if (game.players.indexOf(player) < 0) {%>
-                    <td class="cell" data-player="<%= player %>" data-goose="<%= game.id %>"></td>
-                <% } else {%>
-                    <td class="cell success" data-player="<%= player %>" data-goose="<%= game.id %>"></td>
-                <% } %>
-            <% }) %>
-        </tr>
+            <% games.forEach(function(game) { %>
+            <tr>
+                <td><b><%= game.title %></b> by <%= game.author %></td>
+                <% players.forEach(function(player) { %>
+                    <% if (game.author == player) { %>
+                        <td class="crossed"></td>
+                    <% } else if (game.players && game.players.indexOf(player) >= 0) {%>
+                        <td class="cell success" data-player="<%= player %>" data-goose="<%= game.id %>"></td>
+                    <% } else {%>
+                        <td class="cell" data-player="<%= player %>" data-goose="<%= game.id %>"></td>
+                    <% } %>
+                <% }) %>
+            </tr>
         <% })%>
     </table>
+    <% } else { %>
+    <h2>No games currently present</h2>
+    <% }%>
 </div>
 </body>
 </html>

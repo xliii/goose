@@ -2,13 +2,19 @@
 <% include templates/head.ejs %>
 
 <body>
-<h1>List of games</h1>
+<div class="container">
+    <h1><b>List of games</b></h1>
+    <% if (games.length) {%>
     <ul>
-    <% for (var i = 0; i < list.length; i++) { %>
+    <% games.forEach(function(game) {%>
     <li>
-        <a href="/goose/read/<%= list[i].id %>"><%= list[i].title %> by <%= list[i].author %></a>
+        <a href="/goose/read/<%= game.id %>"><%= game.title %> by <%= game.author %></a>
     </li>
-    <% } %>
+    <% }) %>
     </ul>
+    <% } else { %>
+        <h2>No games currently present</h2>
+    <% } %>
+</div>
 </body>
 </html>
