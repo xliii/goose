@@ -3,24 +3,39 @@
 <body>
 <script>
     $('document').ready(function() {
+        var ID;
+
+        function updateButtons(saved) {
+            if (saved) {
+                $('#addBtn').hide();
+                $('#removeBtn').show();
+            } else {
+                $('#addBtn').show();
+                $('#removeBtn').hide();
+            }
+        }
+
         $('#addBtn').click(function() {
             var data = $('#gooseData').data('goose');
             $.post('/goose/add', {
                 goose: JSON.stringify(data)
-            }, function(data) {
-                if (data.message) {
-                    alert(data.message);
+            }, function(result) {
+                if (result.message) {
+                    updateButtons(true);
+                    ID = result.id;
+                    alert(result.message);
                 }
             });
         });
         $('#removeBtn').click(function() {
-            var id = $('#gooseData').data('goose')._id;
+            var id = ID || $('#gooseData').data('goose')._id;
             $.ajax({
                 url: '/goose/' + id,
                 type: 'DELETE',
-                success: function(data) {
-                    if (data.message) {
-                        alert(data.message);
+                success: function(result) {
+                    if (result.message) {
+                        updateButtons(false);
+                        alert(result.message);
                     }
                 }
             });
@@ -47,10 +62,7 @@
         </ul>
     <% } %>
     <input id="gooseData" type="hidden" data-goose="<%= JSON.stringify(goose) %>">
-    <% if (saved) { %>
-        <button id="removeBtn" type="button" class="btn btn-danger">Remove from DB</button>
-    <% } else { %>
-        <button id="addBtn" type="button" class="btn btn-success">Add to DB</button>
-    <% }%>
+    <button id="removeBtn" type="button" style="display:<%= saved ? 'inline-block' : 'none' %>" class="btn btn-danger">Remove from DB</button>
+    <button id="addBtn" type="button" style="display:<%= saved ? 'none' : 'inline-block' %>" class="btn btn-success">Add to DB</button>
 </body>
 </html>

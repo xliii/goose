@@ -57,7 +57,7 @@ router.post('/add', function(req, res) {
     var goose = JSON.parse(req.body.goose);
     Goose.add(goose, function() {
         console.log('Goose added!');
-        res.send({message : 'Goose successfully added!'});
+        res.send({message : 'Goose successfully added!', id: goose._id});
     });
 });
 
