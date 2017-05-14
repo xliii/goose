@@ -83,3 +83,15 @@ table td.crossed {
 .option-incorrect {
     color: red;
 }
+
+.back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 30px;
+    color: #333333;
+}
+
+.back:hover {
+    color: #777777;
+}

@@ -68,7 +68,7 @@ router.delete('/:id', function(req, res) {
     })
 });
 
-router.get('/read/:id', function(req, res) {
+router.get('/:id', function(req, res) {
     Goose.findOne(req.params.id, function(goose) {
         if (goose) {
             res.render('goose', {

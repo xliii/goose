@@ -2,13 +2,14 @@
 <% include templates/head.ejs %>
 
 <body>
+<a href="/"><span class="glyphicon glyphicon-chevron-left back"></span></a>
 <div class="container">
     <h1><b>List of games</b></h1>
     <% if (games.length) {%>
     <ul>
     <% games.forEach(function(game) {%>
     <li>
-        <a href="/goose/read/<%= game.id %>"><%= game.title %> by <%= game.author %></a>
+        <a href="/goose/<%= game.id %>"><%= game.title %> by <%= game.author %></a>
     </li>
     <% }) %>
     </ul>

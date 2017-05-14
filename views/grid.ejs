@@ -20,6 +20,7 @@
 </script>
 
 <body>
+<a href="/"><span class="glyphicon glyphicon-chevron-left back"></span></a>
 <div class="container">
     <h1><b>Grid of games</b></h1>
     <% if (games.length && players.length) { %>
@@ -32,7 +33,7 @@
         </tr>
             <% games.forEach(function(game) { %>
             <tr>
-                <td><b><%= game.title %></b> by <%= game.author %></td>
+                <td><a href="/goose/<%= game.id %>"><b><%= game.title %></b> by <%= game.author %></a></td>
                 <% players.forEach(function(player) { %>
                     <% if (game.author == player) { %>
                         <td class="crossed"></td>

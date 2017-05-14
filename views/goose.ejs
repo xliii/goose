@@ -42,6 +42,8 @@
         });
     });
 </script>
+<a href="/"><span class="glyphicon glyphicon-chevron-left back"></span></a>
+<div class="container">
     <h1><b><%= goose.title%></b> by <%= goose.author %></h1>
     <% goose.rounds.forEach(function(round){ %>
         <h2><%= round.title %></h2>
@@ -64,5 +66,6 @@
     <input id="gooseData" type="hidden" data-goose="<%= JSON.stringify(goose) %>">
     <button id="removeBtn" type="button" style="display:<%= saved ? 'inline-block' : 'none' %>" class="btn btn-danger">Remove from DB</button>
     <button id="addBtn" type="button" style="display:<%= saved ? 'none' : 'inline-block' %>" class="btn btn-success">Add to DB</button>
+</div>
 </body>
 </html>
