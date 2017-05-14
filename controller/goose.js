@@ -3,6 +3,7 @@
  */
 var router = require('express').Router();
 var Goose = require('../model/goose');
+var Game = require('../model/game');
 
 router.get('/', function(req, res) {
     res.redirect('/goose/list');
@@ -78,6 +79,13 @@ router.get('/:id', function(req, res) {
         } else {
             res.redirect('/404');
         }
+    });
+});
+
+router.get('/:id/play', function(req, res) {
+    Goose.findOne(req.params.id, function(goose) {
+        var game = Game.new(goose);
+        res.send('Created game: ' + game.id);
     });
 });
 

@@ -9,9 +9,11 @@
             if (saved) {
                 $('#addBtn').hide();
                 $('#removeBtn').show();
+                $('#playBtn').show();
             } else {
                 $('#addBtn').show();
                 $('#removeBtn').hide();
+                $('#playBtn').hide();
             }
         }
 
@@ -40,6 +42,9 @@
                 }
             });
         });
+        $('#playBtn').click(function() {
+            window.location.href = window.location.href + '/play';
+        });
     });
 </script>
 <a href="/"><span class="glyphicon glyphicon-chevron-left back"></span></a>
@@ -64,6 +69,7 @@
         </ul>
     <% } %>
     <input id="gooseData" type="hidden" data-goose="<%= JSON.stringify(goose) %>">
+    <button id="playBtn" type="button" style="display:<%= saved ? 'inline-block' : 'none' %>" class="btn btn-info">Play</button>
     <button id="removeBtn" type="button" style="display:<%= saved ? 'inline-block' : 'none' %>" class="btn btn-danger">Remove from DB</button>
     <button id="addBtn" type="button" style="display:<%= saved ? 'none' : 'inline-block' %>" class="btn btn-success">Add to DB</button>
 </div>
