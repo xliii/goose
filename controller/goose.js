@@ -84,8 +84,9 @@ router.get('/:id', function(req, res) {
 
 router.get('/:id/play', function(req, res) {
     Goose.findOne(req.params.id, function(goose) {
-        var game = Game.new(goose);
-        res.send('Created game: ' + game.id);
+        Game.new(goose, function(game) {
+            res.redirect('/game/' + game._id);
+        });
     });
 });
 

@@ -1,0 +1,28 @@
+<html>
+<% include templates/head.ejs %>
+<body>
+<a href="/"><span class="glyphicon glyphicon-chevron-left back"></span></a>
+<div class="container">
+    <h1><b><%= goose.title%></b> by <%= goose.author %></h1>
+    <% goose.rounds.forEach(function(round){ %>
+    <h2><%= round.title %></h2>
+    <h3><%= round.subtitle %></h3>
+    <ul>
+        <% round.options.forEach(function(option){ %>
+        <li><%= option.name %></li>
+        <% }) %>
+    </ul>
+    <% }) %>
+    <% if (goose.players && goose.players.length) { %>
+    <hr/>
+    <h4>Played by:</h4>
+    <ul>
+        <% goose.players.forEach(function(player) { %>
+        <li><%= player %></li>
+        <% }) %>
+    </ul>
+    <% } %>
+    <input id="gooseData" type="hidden" data-goose="<%= JSON.stringify(goose) %>">
+</div>
+</body>
+</html>

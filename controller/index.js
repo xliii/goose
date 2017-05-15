@@ -8,6 +8,7 @@ router.get('/', function(req, res) {
 });
 
 router.use('/goose', require('./goose'));
+router.use('/game', require('./game'));
 
 router.get('/generate', function(req, res) {
     var goose = require('../misc/generator')();

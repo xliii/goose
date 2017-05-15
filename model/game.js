@@ -3,8 +3,15 @@
  */
 var DB = require('../db');
 
-exports.new = function(goose) {
-    return {
-        id: goose._id
-    }
+exports.new = function(goose, callback) {
+    var game = {
+        goose : goose
+    };
+    DB.add('game', game, function() {
+        callback(game);
+    });
+};
+
+exports.findOne = function(id, callback) {
+    DB.findOne('game', id, callback);
 };
